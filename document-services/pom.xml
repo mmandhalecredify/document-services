@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.credify</groupId>
+		<artifactId>parent-pom</artifactId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>document-services</artifactId>
+
+	<groupId>com.credify</groupId>
+	<packaging>pom</packaging>
+	<version>1.0-SNAPSHOT</version>
+
+
+	<properties>
+		<java.version>1.8</java.version>
+		<service-core.version>1.0-SNAPSHOT</service-core.version>
+		<state-machine.version>1.0-SNAPSHOT</state-machine.version>
+	</properties>
+
+
+	<dependencyManagement>
+	</dependencyManagement>
+
+	<build>
+
+		<plugins>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+			</plugin>
+
+			<!-- Set default TimeZone to UTC for JUnit tests -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+			</plugin>
+			<!-- Integration tests configuration -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-failsafe-plugin</artifactId>
+			</plugin>
+
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+			</plugin>
+
+		</plugins>
+
+
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-checkstyle-plugin</artifactId>
+					<version>2.17</version>
+					<executions>
+						<execution>
+							<id>validate</id>
+							<phase>validate</phase>
+							<configuration>
+								<includeTestSourceDirectory>true</includeTestSourceDirectory>
+								<configLocation>checkstyle/checkstyle_rules.xml</configLocation>
+								<encoding>UTF-8</encoding>
+								<failsOnError>true</failsOnError>
+								<failOnViolation>true</failOnViolation>
+								<consoleOutput>true</consoleOutput>
+								<suppressionsLocation>checkstyle/checkstyle_suppressions.xml</suppressionsLocation>
+								<suppressionsFileExpression>checkstyle.suppressions.file</suppressionsFileExpression>
+								<outputFile>${project.build.directory}/checkstyle/checkstyle-result.xml</outputFile>
+								<cacheFile>${project.build.directory}/checkstyle/checkstyle-cachefile</cacheFile>
+							</configuration>
+							<goals>
+								<goal>check</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+
+	</build>
+
+	<repositories>
+		<repository>
+			<id>spring-releases</id>
+			<name>Spring Releases</name>
+			<url>https://repo.spring.io/libs-release</url>
+		</repository>
+		<repository>
+			<id>org.jboss.repository.releases</id>
+			<name>JBoss Maven Release Repository</name>
+			<url>https://repository.jboss.org/nexus/content/repositories/releases</url>
+		</repository>
+	</repositories>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>spring-releases</id>
+			<name>Spring Releases</name>
+			<url>https://repo.spring.io/libs-release</url>
+		</pluginRepository>
+	</pluginRepositories>
+
+  <modules>
+    <module>document-services-domain</module>
+    <module>document-services-model</module>
+    <module>document-services-service</module>
+    <module>document-services-server</module>
+    <module>document-services-integration</module>
+    <module>document-services-client</module>
+  </modules>
+</project>

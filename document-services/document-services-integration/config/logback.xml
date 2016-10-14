@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="20 seconds" >
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS Z} [%thread] [%level] %logger{36} %X{corrId} - %msg%n</Pattern>
+        </encoder>
+    </appender>
+
+    <appender name="applogfile"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/application.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <FileNamePattern>logs/application.%d{yyyy-MM-dd}.%i.log
+            </FileNamePattern>
+            <!-- each file should be at most 250MB, keep 7 days worth of history, but at most 10GB -->
+            <maxFileSize>250MB</maxFileSize>    
+            <maxHistory>7</maxHistory>
+            <totalSizeCap>10GB</totalSizeCap>
+        </rollingPolicy>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS Z} [%thread] [%level] %logger{36} %X{corrId} - %msg%n</Pattern>
+        </layout>
+    </appender>
+
+    <logger name="com.credify">
+        <level value="DEBUG" />
+    </logger>
+
+    <root level="INFO">
+        <appender-ref ref="STDOUT" />
+    </root>
+</configuration>
